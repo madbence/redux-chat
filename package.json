@@ -1,0 +1,21 @@
+{
+  "name": "redux-chat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "watchify -v -d -t babelify -o bundle.js main.js"
+  },
+  "author": "Bence Dányi <bence@danyi.me>",
+  "license": "MIT",
+  "dependencies": {
+    "babelify": "^6.4.0",
+    "browserify": "^11.2.0",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "react-redux": "^4.0.0",
+    "redux": "^3.0.3",
+    "watchify": "^3.4.0"
+  }
+}
