@@ -21,7 +21,7 @@ class Message extends React.Component {
     }
 
     return (
-      <li><span>{this.props.from}</span>: {this.props.text}</li>
+      <li><span className='foo'>{this.props.from}</span>: {this.props.text}</li>
     );
   }
 }
@@ -78,6 +78,12 @@ const store = applyMiddleware(server)(createStore)((state, action) => {
     case ACK_MESSAGES: return {
       messages: state.messages.map(message => ({ ...message, pending: false })),
     };
+    case CLIENT_JOINED: return {
+      messages: state.messages.concat({
+        from: 'server',
+        text: `${action.payload.user} joined!`
+      }),
+    };
   }
   return state;
 }, {
@@ -86,6 +92,13 @@ const store = applyMiddleware(server)(createStore)((state, action) => {
     text: 'bar',
   }]
 });
+
+setInterval(() => store.dispatch({
+  type: CLIENT_JOINED,
+  payload: {
+    user: Math.random(),
+  },
+}), 5000);
 
 const WrappedChat = connect(x => x)(ChatWindow);
 
@@ -96,3 +109,4 @@ render(
 
 const ADD_MESSAGE = 'ADD_MESSAGE';
 const ACK_MESSAGES = 'ACK_MESSAGES';
+const CLIENT_JOINED = 'CLIENT_JOINED';
